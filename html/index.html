@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="index.css">
+<style>
+
+</style>
+</head>
+<body style="background-color:powderblue;">
+
+<h3>Contact us</h3>
+
+<div class="container">
+  
+    <label for="fname">Name</label>
+    <input type="text" id="fname" name="name" placeholder="Your name..">
+            <label for="lname">Email id</label>
+    <input type="text" id="email" name="email" placeholder="Your Email id..">
+    <label for="lname">Contact no</label>
+    <input type="text" id="contact" name="contact" placeholder="Your Contact no..">
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+    <input type="submit" onclick="myfun()" value="Submit">
+    <h2 id="demo"></h2>
+ 
+</div>
+    <script>
+        function myfun() {
+            let data=JSON.stringify({
+                name:document.getElementById("fname").value,
+                email:document.getElementById("email").value,
+                contact:document.getElementById("contact").value,
+                subject:document.getElementById("subject").value
+            })
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("demo").innerHTML = xhttp.responseText;
+        }
+        xhttp.open("POST", "http://localhost:8090/form");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
+        console.log(data)
+        console.log(xhttp.responseText)
+}
+    </script>
+</body>
+</html>
